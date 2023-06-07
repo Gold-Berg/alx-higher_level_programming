@@ -1,7 +1,4 @@
 #include "list.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <stddef.h>
 listint_t *insert_node(listint_t **head, int number)
 {
 	listint_t *new = malloc(sizeof(listint_t));
