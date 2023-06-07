@@ -9,3 +9,7 @@ def fizzbuzz():
             print("Buzz ", end="")
         else:
             print(f"{num} ", end="")
+def main():
+    fizzbuzz()
+
+main()
