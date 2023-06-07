@@ -10,5 +10,21 @@ listint_t *insert_node(listint_t **head, int number)
 	new->n = number;
 	new->next = NULL;
 
-	:wq
+	if (*head == NULL || number < (*head)->n)
+	{
+		new->next = *head;
+		*head = new;
+	}
+	else
+	{
+		listint_t *current = *head;
+		while (current->next != NULL && number >= current->next->n)
+		{
+			current = current->next;
+		}
 
+		new->next = current->next;
+		current->next = new_node;
+	}
+	return (new);
+}
