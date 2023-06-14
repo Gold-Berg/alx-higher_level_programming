@@ -6,4 +6,4 @@ def square_matrix_simple(matrix=[]):
         for j in range(len(matrix[0])):
             aws[i][j] = matrix[i][j] ** 2
 
-    return result
+    return aws
