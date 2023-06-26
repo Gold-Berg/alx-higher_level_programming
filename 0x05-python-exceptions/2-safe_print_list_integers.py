@@ -1,10 +1,12 @@
 #!/usr/bin/python3
 def safe_print_list_integers(my_list=[], x=0):
-    num = 0
+    track = 0
     for i in my_list:
         try:
             print("{:d}".format(i))
-            num += 1
+            track += 1
+            if track == x:
+                break
         except (ValueError, TypeError, IndexError):
-                pass
-    return num
+            continue
+    return track
