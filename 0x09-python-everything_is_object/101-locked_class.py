@@ -1,6 +1,4 @@
 #!/usr/bin/python3
-""" Module of class """
-
 class LockedClass:
     __slots__ = ('first_name',)
 
