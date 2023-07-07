@@ -1,82 +1,81 @@
-#!/usr/bin/bash
+#!/usr/bin/python3
 """
-N-Queens Problem Solver
+N-Queens Puzzle Solver
 """
 
 import sys
 
-def is_safe(board, row, col, N):
+def is_safe(board, row, col):
     """
-    Check if a queen can be placed at the specified position (row, col) on the board.
+    Check if it's safe to place a queen at position (row, col) on the board
     """
 
-    # Check left side of the current row
-    for i in range(col):
-        if board[row][i] == 1:
+    # Check if there is a queen in the same column
+    for i in range(row):
+        if board[i] == col:
             return False
 
-    # Check upper diagonal on the left side
+    # Check if there is a queen in the same diagonal (left-top to right-bottom)
     for i, j in zip(range(row, -1, -1), range(col, -1, -1)):
-        if board[i][j] == 1:
+        if board[i] == j:
             return False
 
-    # Check lower diagonal on the left side
-    for i, j in zip(range(row, N, 1), range(col, -1, -1)):
-        if board[i][j] == 1:
+    # Check if there is a queen in the same diagonal (left-bottom to right-top)
+    for i, j in zip(range(row, -1, -1), range(col, N)):
+        if board[i] == j:
             return False
 
     return True
 
-def solve_nqueens(board, col, N):
+def solve_nqueens(board, row):
     """
-    Recursive function to solve the N-Queens problem using backtracking.
+    Solve the N-Queens problem recursively using backtracking
     """
 
-    # Base case: If all queens are placed, print the solution
-    if col == N:
-        solution = [[row, col] for row in range(N) if board[row][col] == 1]
-        print(solution)
+    # Base case: All queens are placed, print the solution
+    if row == N:
+        print_solution(board)
         return
 
-    # Recursive backtracking to try placing a queen in each row of the current column
-    for row in range(N):
-        if is_safe(board, row, col, N):
-            board[row][col] = 1
-            solve_nqueens(board, col + 1, N)
-            board[row][col] = 0
+    # Try placing a queen in each column of the current row
+    for col in range(N):
+        if is_safe(board, row, col):
+            board[row] = col
+            solve_nqueens(board, row + 1)
+            board[row] = -1
 
-def nqueens(N):
+def print_solution(board):
     """
-    Solve the N-Queens problem for a given N.
+    Print the board configuration as a solution
     """
 
-    # Check if N is an integer
-    if not isinstance(N, int):
-        print("N must be a number")
-        sys.exit(1)
+    solution = []
+    for i in range(N):
+        row = ['.'] * N
+        row[board[i]] = 'Q'
+        solution.append(''.join(row))
+    print('\n'.join(solution))
+    print()
 
-    # Check if N is greater or equal to 4
-    if N < 4:
-        print("N must be at least 4")
-        sys.exit(1)
-
-    # Create an empty N x N chessboard
-    board = [[0 for _ in range(N)] for _ in range(N)]
-
-    # Solve the N-Queens problem
-    solve_nqueens(board, 0, N)
-
-if __name__ == "__main__":
-    # Check the number of arguments
+if __name__ == '__main__':
+    # Check if the correct number of arguments is provided
     if len(sys.argv) != 2:
         print("Usage: nqueens N")
         sys.exit(1)
 
-    # Get the value of N from the command-line argument
     try:
         N = int(sys.argv[1])
     except ValueError:
         print("N must be a number")
         sys.exit(1)
 
-    nqueens(N)
+    # Check if N is at least 4
+    if N < 4:
+        print("N must be at least 4")
+        sys.exit(1)
+
+    # Initialize the board with -1 (no queen)
+    board = [-1] * N
+
+    # Solve the N-Queens problem
+    solve_nqueens(board, 0)
