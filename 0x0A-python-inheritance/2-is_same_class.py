@@ -6,6 +6,7 @@ checks if obj is an instace
 
 def is_exact_instance(obj, class_type):
     """
+
     Return true if obj is an innstance else false
     """
 
