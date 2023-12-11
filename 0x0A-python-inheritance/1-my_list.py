@@ -13,6 +13,8 @@ class MyList(list):
         """
         print the list in sorted order
         """
-        sorted_list = sorted(self)
+
+        sorted_list = self[:]
         sorted_list.sort()
+
         print(sorted_list)
