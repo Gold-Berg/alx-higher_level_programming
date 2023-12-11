@@ -4,8 +4,10 @@ checks if obj is an instace
 """
 
 
-def is_exact_instance(obj, class_type):
+def is_same_class(obj, a_class):
     """
-    Returns True if the object is exactly an instance else False.
+    Checks if two objects are the same class
     """
-    return isinstance(obj, class_type) and type(obj) is class_type
+    if not isinstance(a_class, type):
+        raise TypeError("a_class must be a type")
+    return (type(obj) is a_class)
