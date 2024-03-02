@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+"""
+Python script that fetches an URL with requests package
+"""
 import requests
 
 if __name__ == "__main__":
