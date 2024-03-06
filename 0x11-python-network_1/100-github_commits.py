@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """
 This script lists 10 commits (from the most recent to oldest) of a repository by a specific user.
 """
